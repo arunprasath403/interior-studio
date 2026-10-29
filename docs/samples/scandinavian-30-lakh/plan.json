@@ -1,0 +1,579 @@
+{
+  "project_id": "proj_fcb8467b",
+  "metadata": {
+    "total_area_sqm": 90.0,
+    "bhk": "2BHK",
+    "total_budget": 3000000.0,
+    "currency": "INR",
+    "aesthetic_theme": "Scandinavian",
+    "tier": "luxury",
+    "design_source": "agent",
+    "spent": 2999988.26,
+    "remaining": 11.74,
+    "spent_by_category": {
+      "fixed": 899997.85,
+      "furniture": 1349996.32,
+      "lighting": 449996.8,
+      "decor": 299997.29
+    },
+    "notes": "Warm look with natural wood and plants; no TV in the living room."
+  },
+  "topology": {
+    "nodes": [
+      {
+        "room_id": "room_living_01",
+        "room_name": "Living",
+        "kind": "living",
+        "area_sqm": 32.81,
+        "dimensions_m": {
+          "width": 6.78,
+          "depth": 4.84
+        },
+        "allocated_budget": 1016062.79,
+        "diffusion_parameters": {
+          "positive_prompt": "seamless 360 equirectangular spherical panorama, 2:1 aspect ratio, camera at eye level (1.5 m) in the centre of the room, living room interior, scandinavian, pale birch wood, soft white walls, wool textures, muted sage and grey accents, 32.81 square metres, 6.78 m by 4.84 m, 2.8 m ceiling, Pale oak engineered wood floors under a wool-blend rug in muted moss; walls in soft chalk white with one textured-paint feature wall; brass pendant and linen sofa glow in warm afternoon light., featuring l-shaped sofa, coffee table, area rug, statement pendant light, arc floor lamp, framed wall art, finishes: engineered wood flooring, textured paint feature wall finish, photorealistic interior photography, architectural render, physically correct global illumination, natural daylight through windows plus warm 2700K downlights, sharp detail, seamless horizontal wrap",
+          "negative_prompt": "seam line, split image, distorted furniture, fisheye vignette, text, watermark, cartoon, low resolution, blurry, harsh fluorescent lighting",
+          "seed": 1227188163
+        },
+        "asset_url": "panos/room_living_01_360.jpg",
+        "hotspots": [
+          {
+            "id": "room_living_01_sofa",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.0,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "L-shaped Sofa",
+              "cost": 305255.39,
+              "category": "furniture",
+              "material": "Performance linen"
+            }
+          },
+          {
+            "id": "room_living_01_coffee_table",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.5712,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Coffee Table",
+              "cost": 87215.95,
+              "category": "furniture",
+              "material": "Solid wood"
+            }
+          },
+          {
+            "id": "room_living_01_rug",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 1.1424,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Area Rug",
+              "cost": 104994.55,
+              "category": "decor",
+              "material": "Wool blend"
+            }
+          },
+          {
+            "id": "room_living_01_pendant",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 1.7136,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Statement Pendant Light",
+              "cost": 129418.45,
+              "category": "lighting",
+              "material": "Brass"
+            }
+          },
+          {
+            "id": "room_living_01_floor_lamp",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.2848,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Arc Floor Lamp",
+              "cost": 64708.8,
+              "category": "lighting",
+              "material": "Metal"
+            }
+          },
+          {
+            "id": "room_living_01_wall_art",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.856,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Framed Wall Art",
+              "cost": 52496.85,
+              "category": "decor",
+              "material": "Canvas"
+            }
+          },
+          {
+            "id": "room_living_01_flooring",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.856,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Flooring",
+              "cost": 181315.2,
+              "category": "fixed",
+              "material": "Engineered wood"
+            }
+          },
+          {
+            "id": "room_living_01_wall_finish",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.2848,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Feature Wall Finish",
+              "cost": 90657.6,
+              "category": "fixed",
+              "material": "Textured paint"
+            }
+          },
+          {
+            "id": "room_living_01_to_room_kitchen_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -1.428,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_kitchen_01",
+              "label": "Go to Kitchen"
+            }
+          },
+          {
+            "id": "room_living_01_to_room_master_bedroom_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -0.8568,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_master_bedroom_01",
+              "label": "Go to Master Bedroom"
+            }
+          },
+          {
+            "id": "room_living_01_to_room_bedroom_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -0.2856,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_bedroom_01",
+              "label": "Go to Bedroom"
+            }
+          }
+        ]
+      },
+      {
+        "room_id": "room_kitchen_01",
+        "room_name": "Kitchen",
+        "kind": "kitchen",
+        "area_sqm": 14.06,
+        "dimensions_m": {
+          "width": 4.28,
+          "depth": 3.29
+        },
+        "allocated_budget": 530380.45,
+        "diffusion_parameters": {
+          "positive_prompt": "seamless 360 equirectangular spherical panorama, 2:1 aspect ratio, camera at eye level (1.5 m) in the centre of the room, modular kitchen interior, scandinavian, pale birch wood, soft white walls, wool textures, muted sage and grey accents, 14.06 square metres, 4.28 m by 3.29 m, 2.8 m ceiling, Quartz counters in warm white, pale oak laminate cabinets, ceramic-tile backsplash in soft sage; brass-edged glass pendants over a solid-wood breakfast counter; under-cabinet LEDs cast gentle glow., featuring breakfast counter set, pendant lights, herb planter, under-cabinet led strip, finishes: laminate shutters modular cabinets, quartz countertop, ceramic tile backsplash, photorealistic interior photography, architectural render, physically correct global illumination, natural daylight through windows plus warm 2700K downlights, sharp detail, seamless horizontal wrap",
+          "negative_prompt": "seam line, split image, distorted furniture, fisheye vignette, text, watermark, cartoon, low resolution, blurry, harsh fluorescent lighting",
+          "seed": 1005553781
+        },
+        "asset_url": "panos/room_kitchen_01_360.jpg",
+        "hotspots": [
+          {
+            "id": "room_kitchen_01_cabinets",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.0,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Modular Cabinets",
+              "cost": 194246.25,
+              "category": "fixed",
+              "material": "Laminate shutters"
+            }
+          },
+          {
+            "id": "room_kitchen_01_countertop",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.7854,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Countertop",
+              "cost": 90648.25,
+              "category": "fixed",
+              "material": "Quartz"
+            }
+          },
+          {
+            "id": "room_kitchen_01_dining_set",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 1.5708,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Breakfast Counter Set",
+              "cost": 112122.65,
+              "category": "furniture",
+              "material": "Solid wood"
+            }
+          },
+          {
+            "id": "room_kitchen_01_pendant",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.3562,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Pendant Lights",
+              "cost": 44367.45,
+              "category": "lighting",
+              "material": "Glass"
+            }
+          },
+          {
+            "id": "room_kitchen_01_planter",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -3.1416,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Herb Planter",
+              "cost": 16871.65,
+              "category": "decor",
+              "material": "Ceramic"
+            }
+          },
+          {
+            "id": "room_kitchen_01_backsplash",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.3562,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Backsplash",
+              "cost": 38849.25,
+              "category": "fixed",
+              "material": "Ceramic tile"
+            }
+          },
+          {
+            "id": "room_kitchen_01_under_cabinet",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -1.5708,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Under-cabinet LED Strip",
+              "cost": 33274.95,
+              "category": "lighting",
+              "material": "LED"
+            }
+          },
+          {
+            "id": "room_kitchen_01_to_room_living_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -0.3927,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_living_01",
+              "label": "Go to Living"
+            }
+          }
+        ]
+      },
+      {
+        "room_id": "room_master_bedroom_01",
+        "room_name": "Master Bedroom",
+        "kind": "master_bedroom",
+        "area_sqm": 23.44,
+        "dimensions_m": {
+          "width": 5.3,
+          "depth": 4.42
+        },
+        "allocated_budget": 891735.82,
+        "diffusion_parameters": {
+          "positive_prompt": "seamless 360 equirectangular spherical panorama, 2:1 aspect ratio, camera at eye level (1.5 m) in the centre of the room, master bedroom interior, scandinavian, pale birch wood, soft white walls, wool textures, muted sage and grey accents, 23.44 square metres, 5.3 m by 4.42 m, 2.8 m ceiling, Pale oak engineered wood floors, wool-blend rug in heather grey; upholstered king bed in oatmeal linen, brass sconces and dimmable LED cove casting soft amber light., featuring king bed with headboard, built-in wardrobe, bedside tables (pair), wall sconces (pair), bedroom rug, dimmable led cove, curtains, finishes: engineered wood flooring, photorealistic interior photography, architectural render, physically correct global illumination, natural daylight through windows plus warm 2700K downlights, sharp detail, seamless horizontal wrap",
+          "negative_prompt": "seam line, split image, distorted furniture, fisheye vignette, text, watermark, cartoon, low resolution, blurry, harsh fluorescent lighting",
+          "seed": 1198376017
+        },
+        "asset_url": "panos/room_master_bedroom_01_360.jpg",
+        "hotspots": [
+          {
+            "id": "room_master_bedroom_01_bed",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.0,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "King Bed with Headboard",
+              "cost": 249233.59,
+              "category": "furniture",
+              "material": "Upholstered"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_wardrobe",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.6981,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Built-in Wardrobe",
+              "cost": 218079.4,
+              "category": "furniture",
+              "material": "Laminate"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_nightstands",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 1.3963,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Bedside Tables (pair)",
+              "cost": 62308.39,
+              "category": "furniture",
+              "material": "Solid wood"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_sconces",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.0944,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Wall Sconces (pair)",
+              "cost": 55475.25,
+              "category": "lighting",
+              "material": "Brass"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_rug",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.7925,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Bedroom Rug",
+              "cost": 56257.25,
+              "category": "decor",
+              "material": "Wool blend"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_cove_light",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.7925,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Dimmable LED Cove",
+              "cost": 73967.0,
+              "category": "lighting",
+              "material": "LED"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_curtains",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.0944,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Curtains",
+              "cost": 46880.89,
+              "category": "decor",
+              "material": "Linen"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_flooring",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -1.3963,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Flooring",
+              "cost": 129534.05,
+              "category": "fixed",
+              "material": "Engineered wood"
+            }
+          },
+          {
+            "id": "room_master_bedroom_01_to_room_living_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -0.3491,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_living_01",
+              "label": "Go to Living"
+            }
+          }
+        ]
+      },
+      {
+        "room_id": "room_bedroom_01",
+        "room_name": "Bedroom",
+        "kind": "bedroom",
+        "area_sqm": 14.06,
+        "dimensions_m": {
+          "width": 4.11,
+          "depth": 3.42
+        },
+        "allocated_budget": 386866.45,
+        "diffusion_parameters": {
+          "positive_prompt": "seamless 360 equirectangular spherical panorama, 2:1 aspect ratio, camera at eye level (1.5 m) in the centre of the room, bedroom interior, scandinavian, pale birch wood, soft white walls, wool textures, muted sage and grey accents, 14.06 square metres, 4.11 m by 3.42 m, 2.8 m ceiling, Cool-toned vitrified tile floors, linen curtains filtering morning light; upholstered queen bed in pale taupe, solid-wood study desk and ceramic bedside lamps., featuring queen bed, wardrobe, study desk, bedside lamps, curtains, finishes: vitrified tile flooring, photorealistic interior photography, architectural render, physically correct global illumination, natural daylight through windows plus warm 2700K downlights, sharp detail, seamless horizontal wrap",
+          "negative_prompt": "seam line, split image, distorted furniture, fisheye vignette, text, watermark, cartoon, low resolution, blurry, harsh fluorescent lighting",
+          "seed": 1507619085
+        },
+        "asset_url": "panos/room_bedroom_01_360.jpg",
+        "hotspots": [
+          {
+            "id": "room_bedroom_01_bed",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.0,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Queen Bed",
+              "cost": 121466.7,
+              "category": "furniture",
+              "material": "Upholstered"
+            }
+          },
+          {
+            "id": "room_bedroom_01_wardrobe",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 0.8976,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Wardrobe",
+              "cost": 102779.45,
+              "category": "furniture",
+              "material": "Laminate"
+            }
+          },
+          {
+            "id": "room_bedroom_01_study_desk",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 1.7952,
+              "pitch": -0.25
+            },
+            "payload": {
+              "title": "Study Desk",
+              "cost": 46717.7,
+              "category": "furniture",
+              "material": "Solid wood"
+            }
+          },
+          {
+            "id": "room_bedroom_01_bedside_lamp",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": 2.6928,
+              "pitch": 0.55
+            },
+            "payload": {
+              "title": "Bedside Lamps",
+              "cost": 22183.3,
+              "category": "lighting",
+              "material": "Ceramic"
+            }
+          },
+          {
+            "id": "room_bedroom_01_curtains",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -2.6928,
+              "pitch": -0.4
+            },
+            "payload": {
+              "title": "Curtains",
+              "cost": 22496.1,
+              "category": "decor",
+              "material": "Linen"
+            }
+          },
+          {
+            "id": "room_bedroom_01_flooring",
+            "type": "product_tag",
+            "coordinates": {
+              "yaw": -1.7952,
+              "pitch": -0.05
+            },
+            "payload": {
+              "title": "Flooring",
+              "cost": 71223.2,
+              "category": "fixed",
+              "material": "Vitrified tile"
+            }
+          },
+          {
+            "id": "room_bedroom_01_to_room_living_01",
+            "type": "teleport",
+            "coordinates": {
+              "yaw": -0.4488,
+              "pitch": -0.05
+            },
+            "payload": {
+              "target_room_id": "room_living_01",
+              "label": "Go to Living"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

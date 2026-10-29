@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Generated at run or deploy time (never commit)
+out/
+site/config.js
+*.log
+
+# Model weights
+*.safetensors
+*.ckpt
+*.pt
+
+# Secrets and local tooling
+.env
+.env.*
+hf-token*
+*.pem
+.claude/

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="app-token" content="__APP_TOKEN__">
+<title>Interior 3D</title>
+<link rel="stylesheet" href="/web/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+    "@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.module.js",
+    "@photo-sphere-viewer/markers-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.module.js",
+    "@photo-sphere-viewer/virtual-tour-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="dot"></span>Interior 3D</div>
+  <div class="chips"><span id="mode" class="chip"></span></div>
+</header>
+
+<main class="layout">
+  <section class="side" aria-label="Plan and render">
+    <div id="toast" class="toast" role="alert" hidden></div>
+
+    <form id="create" class="card" autocomplete="off">
+      <h2>1 · Describe your home</h2>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" data-tab="brief" role="tab">In words</button>
+        <button type="button" class="tab" data-tab="details" role="tab">Details</button>
+      </div>
+
+      <div id="tab-brief">
+        <label for="brief">What do you want?</label>
+        <textarea id="brief" rows="4" maxlength="2000" placeholder="2BHK, about 90 sqm, 30 lakh rupees, warm scandinavian, no TV in the living room"></textarea>
+        <div class="examples" id="examples"></div>
+      </div>
+
+      <div id="tab-details" hidden>
+        <div class="grid2">
+          <div><label for="budget">Budget</label><input id="budget" type="number" min="100" step="any" value="40000"></div>
+          <div><label for="currency">Currency</label><select id="currency"></select></div>
+          <div><label for="area">Area (m²)</label><input id="area" type="number" min="15" max="2000" step="any" value="90"></div>
+          <div><label for="bhk">Bedrooms</label>
+            <select id="bhk"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        </div>
+        <label for="style">Style</label>
+        <input id="style" list="styles" value="scandinavian">
+        <datalist id="styles"><option>modern minimalist</option><option>dark academia</option><option>scandinavian</option><option>industrial</option><option>japandi</option></datalist>
+      </div>
+
+      <button id="plan-btn" class="btn primary" type="submit">Plan my home</button>
+      <p class="hint" id="plan-hint">Planning is cheap (a fraction of a cent) and needs no GPU.</p>
+    </form>
+
+    <div id="plan" class="card" hidden>
+      <h2>2 · Review the plan</h2>
+      <div id="plan-body"></div>
+      <div class="gpu-box" id="gpu-box">
+        <div><strong>Render on a GPU</strong><span id="gpu-estimate" class="muted"></span></div>
+        <label class="check"><input id="confirm" type="checkbox"> <span id="confirm-text"></span></label>
+        <button id="render-btn" class="btn primary" type="button" disabled>Render panoramas</button>
+      </div>
+      <button id="open-btn" class="btn" type="button" hidden>Open the tour</button>
+    </div>
+
+    <div id="job" class="card" hidden aria-live="polite">
+      <h2>3 · Rendering</h2>
+      <div id="job-body"></div>
+      <div class="thumbs" id="thumbs"></div>
+      <button id="cancel-btn" class="btn ghost danger" type="button">Cancel and shut the GPU down</button>
+    </div>
+
+    <div id="projects" class="card">
+      <h2>Your projects</h2>
+      <div id="project-list" class="list"><p class="muted">None yet. Plan one above.</p></div>
+      <div id="remote" hidden>
+        <p class="muted">Rendered on AWS but not on this computer:</p>
+        <div id="remote-list" class="list"></div>
+      </div>
+      <button id="remote-btn" class="btn ghost" type="button">Look for renders on AWS</button>
+    </div>
+  </section>
+
+  <section class="stage" aria-label="Tour">
+    <div id="empty" class="empty">
+      <div class="empty-art" aria-hidden="true"></div>
+      <h1>Walk through your design</h1>
+      <p>Describe a home, review the plan, then render it. Each room becomes a photorealistic 360° panorama you can look around and click through.</p>
+      <ol>
+        <li>The AI agents lay out the rooms and pick priced items inside your budget.</li>
+        <li>A GPU renders each room (about 40 seconds apiece).</li>
+        <li>You explore the tour, with every item priced.</li>
+      </ol>
+    </div>
+    <div id="tour-wrap" hidden>
+      <div id="tour"></div>
+      <aside id="tour-side">
+        <div class="tour-title" id="tour-title"></div>
+        <div class="muted" id="tour-sub"></div>
+        <div class="bar"><span id="spent-bar"></span></div>
+        <div class="row"><span>Spent</span><span id="spent"></span></div>
+        <div class="row"><span>Remaining</span><span id="remaining"></span></div>
+        <h3>Rooms</h3><div id="rooms"></div>
+        <h3 id="items-title">Items</h3><div id="items"></div>
+      </aside>
+    </div>
+  </section>
+</main>
+<script type="module" src="/web/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Interior studio backend - public API, scheduler and data (Lambda, API Gateway HTTP API, DynamoDB)
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Existing private bucket that holds the code, jobs and rendered panoramas
+  AllowedOrigin:
+    Type: String
+    Description: The website origin allowed to call the API, e.g. https://main.abc123.amplifyapp.com
+  AccessCode:
+    Type: String
+    NoEcho: true
+    MinLength: 8
+    Description: Invitation code that unlocks creating new designs
+  LambdaKey:
+    Type: String
+    Description: S3 key of the backend zip inside the bucket
+  CodeKey:
+    Type: String
+    Description: S3 key of the code archive the GPU machine downloads
+  GpuRoleName:
+    Type: String
+    Default: ai-interior-gpu
+  DailyRenderCap:
+    Type: Number
+    Default: 6
+  DailyPlanCap:
+    Type: Number
+    Default: 100
+
+Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - { AttributeName: pk, AttributeType: S }
+      KeySchema:
+        - { AttributeName: pk, KeyType: HASH }
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+
+  FunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: studio
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: Data
+                Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem, dynamodb:Scan]
+                Resource: !GetAtt Table.Arn
+              - Sid: ReadResults
+                Effect: Allow
+                Action: s3:GetObject
+                Resource:
+                  - !Sub arn:aws:s3:::${BucketName}/renders/*
+                  - !Sub arn:aws:s3:::${BucketName}/benchmarks/*
+              - Sid: ListResults
+                Effect: Allow
+                Action: s3:ListBucket
+                Resource: !Sub arn:aws:s3:::${BucketName}
+                Condition:
+                  StringLike:
+                    s3:prefix: ["renders/*", "benchmarks/*"]
+              - Sid: WriteJobManifests
+                Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub arn:aws:s3:::${BucketName}/jobs/*
+              - Sid: StartMachines
+                Effect: Allow
+                Action: ec2:RunInstances
+                Resource: "*"
+              - Sid: TagOnLaunchOnly
+                Effect: Allow
+                Action: ec2:CreateTags
+                Resource: "*"
+                Condition:
+                  StringEquals: { "ec2:CreateAction": RunInstances }
+              - Sid: LookUp
+                Effect: Allow
+                Action: [ec2:DescribeInstances, ec2:DescribeInstanceTypeOfferings, ec2:DescribeSubnets]
+                Resource: "*"
+              - Sid: StopOnlyProjectMachines
+                Effect: Allow
+                Action: ec2:TerminateInstances
+                Resource: "*"
+                Condition:
+                  StringEquals: { "ec2:ResourceTag/Name": ai-interior-benchmark }
+              - Sid: HandMachinesTheirRole
+                Effect: Allow
+                Action: iam:PassRole
+                Resource: !Sub arn:aws:iam::${AWS::AccountId}:role/${GpuRoleName}
+                Condition:
+                  StringEquals: { "iam:PassedToService": ec2.amazonaws.com }
+              - Sid: PublicImageLookup
+                Effect: Allow
+                Action: ssm:GetParameter
+                Resource: !Sub arn:aws:ssm:*::parameter/aws/service/deeplearning/ami/*
+              - Sid: Designer
+                Effect: Allow
+                Action: bedrock:InvokeModel
+                Resource: !Sub arn:aws:bedrock:${AWS::Region}::foundation-model/mistral.mistral-large-3-675b-instruct
+              - Sid: WakeSelf
+                Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWS::StackName}-api
+
+  Function:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-api
+      Runtime: python3.12
+      Handler: backend.handler.lambda_handler
+      Timeout: 120
+      MemorySize: 512
+      Role: !GetAtt FunctionRole.Arn
+      Code:
+        S3Bucket: !Ref BucketName
+        S3Key: !Ref LambdaKey
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+          BUCKET: !Ref BucketName
+          CODE_KEY: !Ref CodeKey
+          ACCESS_CODE: !Ref AccessCode
+          DAILY_RENDER_CAP: !Ref DailyRenderCap
+          DAILY_PLAN_CAP: !Ref DailyPlanCap
+
+  Api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub ${AWS::StackName}-http
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins: [!Ref AllowedOrigin]
+        AllowMethods: [GET, POST, OPTIONS]
+        AllowHeaders: [content-type, x-access-code]
+        MaxAge: 3600
+
+  Integration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref Api
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Function.Arn
+      PayloadFormatVersion: "2.0"
+
+  DefaultRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref Api
+      RouteKey: $default
+      Target: !Sub integrations/${Integration}
+
+  Stage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref Api
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 20
+        ThrottlingRateLimit: 10
+
+  ApiPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Function
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*
+
+  Tick:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Moves running renders along once a minute
+      ScheduleExpression: rate(1 minute)
+      State: ENABLED
+      Targets:
+        - Id: studio-tick
+          Arn: !GetAtt Function.Arn
+
+  TickPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Function
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt Tick.Arn
+
+Outputs:
+  ApiUrl:
+    Value: !GetAtt Api.ApiEndpoint
+  TableName:
+    Value: !Ref Table
+  FunctionName:
+    Value: !Ref Function

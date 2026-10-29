@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interior Studio · See your home before you build it</title>
+<meta name="description" content="Tell us your budget, size and style. Our designers plan every room and create a 360° walkthrough you can explore and share.">
+<meta name="theme-color" content="#2f4a3e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f4a3e'/%3E%3Cpath d='M8 23V14l8-6 8 6v9h-5v-6h-6v6z' fill='%23f6f2ec'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+    "@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.module.js",
+    "@photo-sphere-viewer/markers-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.module.js",
+    "@photo-sphere-viewer/virtual-tour-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#/" aria-label="Interior Studio, home">
+    <span class="logo" aria-hidden="true"></span><span>Interior Studio</span>
+  </a>
+  <nav aria-label="Main">
+    <a href="#/gallery" class="nav-link">Homes</a>
+    <a href="#/how" class="nav-link">How it works</a>
+    <a href="#/create" class="btn small">Design your home</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="footer" id="footer">
+  <div>
+    <strong>Interior Studio</strong>
+    <p>Plan, price and walk through your home before the first brick is laid.</p>
+  </div>
+  <p class="fine">Designs are created for inspiration. Prices are estimates and may vary by supplier.</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="config.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
